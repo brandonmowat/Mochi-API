@@ -1,0 +1,1 @@
+web: cat target/*-standalone.jar > dist/Mochi-API-1.0.0-SNAPSHOT-standalone.jar && java -jar dist/Mochi-API-1.0.0-SNAPSHOT-standalone.jar

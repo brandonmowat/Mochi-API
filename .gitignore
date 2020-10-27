@@ -1,0 +1,13 @@
+.cpcache
+.calva
+project.clj
+/classes
+/checkouts
+/dist/*.jar
+pom.xml
+pom.xml.asc
+*.class
+/.nrepl-port
+.hgignore
+.hg/
+.env

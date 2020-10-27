@@ -1,0 +1,79 @@
+/* (228, 80, 98) */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: menlo, M-apple-system, BlinkMacSystemFont;
+  line-height: 1.6;
+  background-color: rgb(25, 28, 39);
+  color: white;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  /* color: rgba(0, 0, 0, 0.8); */
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 500;
+  /* color: rgba(0, 0, 0, 0.3); */
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+p {
+  margin: 0;
+}
+
+.wrapper {
+  padding: 20px 50px;
+}
+
+@media (max-width: 800px) {
+  .wrapper {
+    padding: 20px 10px;
+  }
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+section {
+  display: flex;
+  margin: 32px 0;
+}
+
+section.header {
+  margin: 64px 0;
+}
+
+section .col-2 {
+  flex: 2;
+}
+
+section .col-4 {
+  flex: 4;
+}
+
+section a {
+  display: block;
+}
+
+
+
+
+
+iframe {
+  margin-top: 100px;
+  width: 100%;
+  height: 1500px;
+}

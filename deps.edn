@@ -1,0 +1,33 @@
+{:deps  {;; mongo
+         com.novemberain/monger {:mvn/version "3.5.0"}
+         ;; JSON de/serializer
+         cheshire          {:mvn/version "5.8.1"}
+         ;; HTTP client
+         clj-http          {:mvn/version "3.9.1"}
+         ;; to provide endpoints
+         compojure         {:mvn/version "1.6.1"}
+         ;; webserver & webserver sensible defaults
+         http-kit           {:mvn/version "2.3.0"}
+         ring-basic-authentication {:mvn/version "1.1.0"}
+         ring/ring-defaults {:mvn/version "0.3.2"}
+         ring/ring-devel    {:mvn/version "1.7.1"}
+         ring/ring-json     {:mvn/version "0.5.0"}
+         ;; convert between different key styles
+         camel-snake-kebab {:mvn/version "0.4.0"}
+         ;; scheduler to run jobs asynchronously
+         org.immutant/scheduling {:mvn/version "2.1.10"}
+         ;; simple HTML generator
+         hiccup {:mvn/version "1.0.5"}
+         ;; Markdown Parser
+         markdown-clj {:mvn/version "1.10.5"}}
+ :paths ["src" "resources"]
+ :aliases   {:uberjar
+             {:extra-deps
+              {luchiniatwork/cambada {:mvn/version "1.0.0"}}
+              :main-opts ["-m" "cambada.uberjar"
+                          "-m" "myproject.core"]}
+             :run
+             {:main-opts ["-m" "myproject.core"]}}
+
+ :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
+             "clojars" {:url "https://repo.clojars.org/"}}}
