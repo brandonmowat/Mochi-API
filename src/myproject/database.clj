@@ -3,7 +3,7 @@
             [monger.collection :as mc]
             [monger.conversion :refer [from-db-object]]
             [clojure.walk :as walk]
-            [myproject.helpers :as helpers :refer [now parse-body transform-article-body-to-markdown]])
+            [myproject.helpers :as helpers :refer [now parse-body transform-article-body-to-markdown mapply]])
 
   (:import [com.mongodb MongoOptions ServerAddress])
   (:import org.bson.types.ObjectId)
@@ -20,26 +20,16 @@
       "mongodb://127.0.0.1:27017"))
 
 (defn build-article-to-return
+  "Build article maps to return as a response"
   [article-data]
-  {:id           (str (get article-data :_id))
-   :created      (get article-data :created)
-   :publishedDate (get article-data :publishedDate)
-   :isPublished  (get article-data :isPublished)
-   :tags         (get article-data :tags)
-   :title        (get article-data :title)
-   :description  (get article-data :description)
-   :body         (get article-data :body)})
+  (-> (select-keys article-data [:created :publishedDate :isPublished :tags :title :description :_id :body])
+      (mapply :id str)))
 
 (defn build-article-to-return-html
+  "Build article maps to return as a response and transform the body as markdown"
   [article-data]
-  {:id           (str (get article-data :_id))
-   :created      (get article-data :created)
-   :publishedDate (get article-data :publishedDate)
-   :isPublished  (get article-data :isPublished)
-   :tags         (get article-data :tags)
-   :title        (get article-data :title)
-   :description  (get article-data :description)
-   :body         (transform-article-body-to-markdown (get article-data :body))})
+  (-> (build-article-to-return article-data)
+      (mapply :body transform-article-body-to-markdown)))
 
 (defn build-article-to-save
   [article-data]
