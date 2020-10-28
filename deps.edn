@@ -25,9 +25,9 @@
              {:extra-deps
               {luchiniatwork/cambada {:mvn/version "1.0.0"}}
               :main-opts ["-m" "cambada.uberjar"
-                          "-m" "myproject.core"]}
+                          "-m" "mochi.core"]}
              :run
-             {:main-opts ["-m" "myproject.core"]}}
+             {:main-opts ["-m" "mochi.core"]}}
 
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
              "clojars" {:url "https://repo.clojars.org/"}}}

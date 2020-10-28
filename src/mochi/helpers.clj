@@ -1,4 +1,4 @@
-(ns myproject.helpers
+(ns mochi.helpers
   (:import [java.util Date])
   (:require [markdown.core :as md]))
 

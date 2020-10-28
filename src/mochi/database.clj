@@ -1,9 +1,9 @@
-(ns myproject.database
+(ns mochi.database
   (:require [monger.core :as mg]
             [monger.collection :as mc]
             [monger.conversion :refer [from-db-object]]
             [clojure.walk :as walk]
-            [myproject.helpers :as helpers :refer [now parse-body transform-article-body-to-markdown mapply]])
+            [mochi.helpers :as helpers :refer [now parse-body transform-article-body-to-markdown mapply]])
 
   (:import [com.mongodb MongoOptions ServerAddress])
   (:import org.bson.types.ObjectId)
