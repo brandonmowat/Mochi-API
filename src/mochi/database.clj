@@ -13,11 +13,12 @@
 ; Some Database helpers
 
 
-(defn get-db-uri
+(def get-db-uri
   "helper function to get the correct db URI"
-  []
   (or (System/getenv "MONGODB_URI")
       "mongodb://127.0.0.1:27017"))
+
+(def mongo (get (mg/connect-via-uri get-db-uri) :db))
 
 (defn build-article-to-return
   "Build article maps to return as a response"
@@ -46,33 +47,26 @@
 (defn find-articles
   "get all articles"
   []
-  (let [uri (get-db-uri)
-        {:keys [conn db]} (mg/connect-via-uri uri)
-        coll "articles"]
-    (map build-article-to-return (from-db-object (mc/find-maps db coll) true))))
+  (map build-article-to-return (from-db-object (mc/find-maps mongo "articles") true)))
+
+(find-articles)
 
 (defn find-articles-html
   "get all articles for html"
   []
-  (let [uri (get-db-uri)
-        {:keys [conn db]} (mg/connect-via-uri uri)
-        coll "articles"]
-    (map build-article-to-return-html (from-db-object (mc/find-maps db coll) true))))
+  (map build-article-to-return-html (from-db-object (mc/find-maps mongo "articles") true)))
+
+(find-articles-html)
 
 (defn save-document
   "Save a document to a collection in our database"
   [document]
-  (let [uri (get-db-uri)
-        {:keys [conn db]} (mg/connect-via-uri uri)]
-    (mc/insert-and-return db "articles" document)))
+  (mc/insert-and-return mongo "articles" document))
 
 (defn find-document-by-id
   "Retreive a document by a id"
   [document-id]
-  (let [uri (get-db-uri)
-        {:keys [conn db]} (mg/connect-via-uri uri)
-        coll "articles"]
-    (from-db-object (mc/find-map-by-id db coll (ObjectId. document-id)) true)))
+  (from-db-object (mc/find-map-by-id mongo "articles" (ObjectId. document-id)) true))
 
 (defn create-article
   "Create new article"
@@ -84,23 +78,17 @@
 (defn delete-article
   "Delete article with ID"
   [article-id]
-  (let [uri (get-db-uri)
-        {:keys [conn db]} (mg/connect-via-uri uri)
-        coll "articles"]
-    (mc/remove-by-id db coll (ObjectId. article-id))))
+  (mc/remove-by-id mongo "articles" (ObjectId. article-id)))
 
 ; Update a single document
 ; (mc/update-by-id db coll oid {:score 1088})
 (defn update-article
   "update article"
   [request]
-  (let [uri (get-db-uri)
-        {:keys [conn db]} (mg/connect-via-uri uri)
-        coll "articles"
-        article-data (parse-body request)
+  (let [article-data (parse-body request)
         document-to-update (find-document-by-id (get article-data :id))
         build-pages (= (get article-data :isPublished) true)]
-    (mc/update-by-id db coll
+    (mc/update-by-id mongo "articles"
                      (ObjectId. (get article-data :id))
                      (merge document-to-update article-data))
     (prn "build-pages" build-pages)
