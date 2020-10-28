@@ -1,4 +1,4 @@
-(ns myproject.core
+(ns mochi.core
   (:require [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
@@ -15,7 +15,7 @@
             ;; Relative dependencies
 
 
-            [myproject.database :as db :refer
+            [mochi.database :as db :refer
              [find-document-by-id find-articles find-articles-html create-article delete-article update-article]])
   (:gen-class))
 
