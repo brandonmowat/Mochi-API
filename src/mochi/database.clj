@@ -16,7 +16,7 @@
 (def get-db-uri
   "helper function to get the correct db URI"
   (or (System/getenv "MONGODB_URI")
-      "mongodb://127.0.0.1:27017"))
+      "mongodb://127.0.0.1:27017/blog"))
 
 (def mongo (get (mg/connect-via-uri get-db-uri) :db))
 
@@ -49,14 +49,10 @@
   []
   (map build-article-to-return (from-db-object (mc/find-maps mongo "articles") true)))
 
-(find-articles)
-
 (defn find-articles-html
   "get all articles for html"
   []
   (map build-article-to-return-html (from-db-object (mc/find-maps mongo "articles") true)))
-
-(find-articles-html)
 
 (defn save-document
   "Save a document to a collection in our database"
