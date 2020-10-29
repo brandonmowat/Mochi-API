@@ -1,6 +1,5 @@
 .cpcache
 .calva
-project.clj
 /classes
 /checkouts
 /dist/*.jar
