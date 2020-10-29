@@ -4,8 +4,6 @@
 
 (defn now [] (Date.))
 
-(now)
-
 (defn parse-body
   "Get the body of a request. This takes the payload"
   [request]
