@@ -23,7 +23,7 @@
 (defn build-article-to-return
   "Build article maps to return as a response"
   [article-data]
-  (-> (select-keys article-data [:created :publishedDate :isPublished :tags :title :description :_id :body])
+  (-> (select-keys article-data [:created :publishedDate :isPublished :tags :title :description :id :body])
       (mapply :id str)))
 
 (defn build-article-to-return-html
