@@ -98,6 +98,6 @@
   (prn 'STARTING-SERVER "on port" (str (get-port)))
   (def stop-server
     (-> (wrap-reload #'project-api)
-        (wrap-cors :access-control-allow-origin #"http://localhost:8000" :access-control-allow-credentials "true")
+        (wrap-cors :access-control-allow-origin "http://localhost:8000" :access-control-allow-credentials "true")
         (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))
         (run-server {:port (get-port)}))))
