@@ -2,6 +2,7 @@
   (:require [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [ring.middleware.cors :refer [wrap-cors]]
             [ring.util.response :refer [response]]
             [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
             [clj-http.client :as client]
@@ -97,5 +98,6 @@
   (prn 'STARTING-SERVER "on port" (str (get-port)))
   (def stop-server
     (-> (wrap-reload #'project-api)
+        (wrap-cors :access-control-allow-origin #".*" :access-control-allow-credentials "true")
         (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))
         (run-server {:port (get-port)}))))
