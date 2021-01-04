@@ -41,7 +41,7 @@
     (find-document-by-id)))
   (->> (get-in request [:params :article-id])
     (find-document-by-id)
-    (request)))
+    (response)))
 
 (defn get-articles
   "Get all articles"
