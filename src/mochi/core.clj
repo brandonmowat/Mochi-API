@@ -38,7 +38,9 @@
 
 (defn retrieve-article [post-id]
   (prn post-id)
-  (find-document-by-id post-id))
+  (->
+    (find-document-by-id post-id)
+    (response)))
 
 (defn get-articles
   "Get all articles"
