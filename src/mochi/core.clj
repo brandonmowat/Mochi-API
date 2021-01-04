@@ -80,7 +80,7 @@
     (POST "/" [] (wrap-json-body create-article {:keywords? true})))
   (context "/api/v1/articles/:article-id" [article-id]
     (GET "/" [] (retrieve-article article-id))
-    (POST "/" [] (wrap-json-response (wrap-json-body patch-article-request-handler {:keywords? true})))
+    (PATCH "/" [] (wrap-json-response (wrap-json-body patch-article-request-handler {:keywords? true})))
     (DELETE "/" [] (delete-articles-request-handler article-id))))
 
 (def admin-routes
