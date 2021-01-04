@@ -37,7 +37,7 @@
   (if (not= (get build-pages :build-pages) false) (client/post (System/getenv "BUILD_HOOK_URL") {})))
 
 (defn retrieve-article [request]
-  (prn request)
+  (prn (get-in request [:params :article-id]))
   (->> (get-in request [:params :article-id])
     (find-document-by-id)
     (request)))
