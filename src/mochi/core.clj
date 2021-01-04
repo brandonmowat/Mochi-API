@@ -101,5 +101,5 @@
         (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))
         (wrap-cors  :access-control-allow-credentials "true"
             :access-control-allow-origin #".*"
-            :access-control-allow-methods [:get :post :delete])
+            :access-control-allow-methods [:get :post :delete :patch])
         (run-server {:port (get-port)}))))
