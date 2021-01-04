@@ -38,7 +38,7 @@
 
 (defn retrieve-article [request]
   (prn request)
-  (->> (get-in request [:params "article-id"])
+  (->> (get-in request [:params :article-id])
     (find-document-by-id)
     (request)))
 
