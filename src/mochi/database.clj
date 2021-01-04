@@ -82,7 +82,7 @@
   "update article"
   [request]
   (let [article-data (parse-body request)
-        document-to-update (find-document-by-id (get article-data :id))
+        document-to-update (find-document-by-id (get-in request [:params :article-id]))
         build-pages (= (get article-data :isPublished) true)]
     (mc/update-by-id mongo "articles"
                      (ObjectId. (get article-data :id))
