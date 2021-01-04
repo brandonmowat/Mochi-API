@@ -36,9 +36,11 @@
   [build-pages]
   (if (not= (get build-pages :build-pages) false) (client/post (System/getenv "BUILD_HOOK_URL") {})))
 
-(defn retrieve-article [post-id]
-  (prn post-id)
-  (wrap-json-response (response (find-document-by-id post-id))))
+(defn retrieve-article [request]
+  (prn request)
+  (->> (get-in request [:params "article-id"])
+    (find-document-by-id)
+    (request)))
 
 (defn get-articles
   "Get all articles"
@@ -79,7 +81,7 @@
       (wrap-json-response get-articles))
     (POST "/" [] (wrap-json-body create-article {:keywords? true})))
   (context "/api/v1/articles/:article-id" [article-id]
-    (GET "/" [] (retrieve-article article-id))
+    (GET "/" [] (wrap-json-response retrieve-article))
     (PATCH "/" [] (wrap-json-response (wrap-json-body patch-article-request-handler {:keywords? true})))
     (DELETE "/" [] (delete-articles-request-handler article-id))))
 
