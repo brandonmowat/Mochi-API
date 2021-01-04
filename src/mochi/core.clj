@@ -40,7 +40,6 @@
   (prn post-id)
   (->
     (find-document-by-id post-id)
-    (response)
     (wrap-json-response)))
 
 (defn get-articles
