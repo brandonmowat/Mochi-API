@@ -62,7 +62,7 @@
 (defn find-document-by-id
   "Retreive a document by a id"
   [document-id]
-  (from-db-object (mc/find-map-by-id mongo "articles" (ObjectId. document-id)) true))
+  (build-article-to-return (from-db-object (mc/find-map-by-id mongo "articles" (ObjectId. document-id)) true)))
 
 (defn create-article
   "Create new article"
