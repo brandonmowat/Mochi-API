@@ -3,6 +3,7 @@
             [monger.collection :as mc]
             [monger.conversion :refer [from-db-object]]
             [clojure.walk :as walk]
+            [ring.util.response :refer [response]]
             [mochi.helpers :as helpers :refer [now parse-body transform-article-body-to-markdown mapply]])
 
   (:import [com.mongodb MongoOptions ServerAddress])
@@ -68,7 +69,8 @@
   "Create new article"
   [request]
   (-> (build-article-to-save (parse-body request))
-      (save-document)))
+      (save-document)
+      (response)))
 
 ; mc/remove db coll {:_id oid}
 (defn delete-article
