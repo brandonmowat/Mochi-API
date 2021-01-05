@@ -86,6 +86,6 @@
         build-pages (= (get article-data :isPublished) true)]
     (mc/update-by-id mongo "articles"
                      (ObjectId. (get-in request [:params :article-id]))
-                     (merge document-to-update article-data))
+                     (->> (merge document-to-update article-data) (build-article-to-save)))
     (prn "build-pages" build-pages)
     {:build-pages build-pages}))
