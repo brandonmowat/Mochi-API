@@ -80,7 +80,7 @@
   (context "/api/v1/articles" []
     (GET "/" []
       (wrap-json-response get-articles))
-    (POST "/" [] (wrap-json-body create-article {:keywords? true})))
+    (POST "/" [] (wrap-json-response (wrap-json-body create-article {:keywords? true}))))
   (context "/api/v1/articles/:article-id" [article-id]
     (GET "/" [] (wrap-json-response retrieve-article))
     (PATCH "/" [] (wrap-json-response (wrap-json-body patch-article-request-handler {:keywords? true})))
