@@ -70,6 +70,7 @@
   [request]
   (-> (build-article-to-save (parse-body request))
       (save-document)
+      (build-article-to-return)
       (response)))
 
 ; mc/remove db coll {:_id oid}
