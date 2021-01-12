@@ -33,7 +33,7 @@
   (-> (build-article-to-return article-data)
       (mapply :body transform-article-body-to-markdown)))
 
-(defn build-article-to-save
+(defn build-article-to-create
   [article-data]
   {:created      (now)
    :publishedDate nil
@@ -42,6 +42,10 @@
    :title        (get article-data :title)
    :description  (get article-data :description)
    :body         (get article-data :body)})
+
+(defn build-article-to-save
+  [article-data]
+  (select-keys article-data [:created :publishedDate :isPublished :tags :title :description :body]))
 
 ; Functions to connect to the database
 
@@ -68,7 +72,7 @@
 (defn create-article
   "Create new article"
   [request]
-  (-> (build-article-to-save (parse-body request))
+  (-> (build-article-to-create (parse-body request))
       (save-document)
       (build-article-to-return)
       (response)))
