@@ -1,26 +1,27 @@
 {:deps  {;; mongo
          com.novemberain/monger {:mvn/version "3.5.0"}
          ;; JSON de/serializer
-         cheshire          {:mvn/version "5.8.1"}
+         cheshire/cheshire           {:mvn/version "5.8.1"}
          ;; HTTP client
-         clj-http          {:mvn/version "3.9.1"}
+         clj-http/clj-http           {:mvn/version "3.9.1"}
          ;; to provide endpoints
-         compojure         {:mvn/version "1.6.1"}
+         compojure/compojure          {:mvn/version "1.6.1"}
          ;; webserver & webserver sensible defaults
-         http-kit           {:mvn/version "2.3.0"}
-         ring-basic-authentication {:mvn/version "1.1.0"}
-         ring/ring-defaults {:mvn/version "0.3.2"}
-         ring/ring-devel    {:mvn/version "1.7.1"}
+         http-kit/http-kit           {:mvn/version "2.3.0"}
+         ring-basic-authentication/ring-basic-authentication {:mvn/version "1.1.0"}
+         ring/ring               {:mvn/version "1.9.0"}
+         ring/ring-defaults {:mvn/version "0.3.3"}
+         ring/ring-devel    {:mvn/version "1.9.4"}
          ring/ring-json     {:mvn/version "0.5.0"}
-         ring-cors          {:mvn/version "0.1.13"}
+         ring-cors/ring-cors          {:mvn/version "0.1.13"}
          ;; convert between different key styles
-         camel-snake-kebab {:mvn/version "0.4.0"}
+         camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.0"}
          ;; scheduler to run jobs asynchronously
          org.immutant/scheduling {:mvn/version "2.1.10"}
          ;; simple HTML generator
-         hiccup {:mvn/version "1.0.5"}
+         hiccup/hiccup {:mvn/version "1.0.5"}
          ;; Markdown Parser
-         markdown-clj {:mvn/version "1.10.5"}}
+         markdown-clj/markdown-clj {:mvn/version "1.10.5"}}
  :paths ["src" "resources"]
  :aliases   {:uberjar
              {:extra-deps

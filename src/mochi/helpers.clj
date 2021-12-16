@@ -1,6 +1,9 @@
 (ns mochi.helpers
   (:import [java.util Date])
-  (:require [markdown.core :as md]))
+  (:require
+   [markdown.core :as md]
+   [clojure.instant :as instant]
+   ))
 
 (defn now [] (Date.))
 
@@ -17,3 +20,11 @@
   "Apply the function to a keys value in a map"
   [map key fn]
   (assoc map key (fn (get map key))))
+
+(defn sort-articles
+  [articles]
+  (sort 
+   (fn [a b] (compare 
+              (instant/read-instant-date (:created b)) 
+              (instant/read-instant-date (:created a)))) 
+   articles))

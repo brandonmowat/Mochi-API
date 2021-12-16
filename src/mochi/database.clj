@@ -4,7 +4,7 @@
             [monger.conversion :refer [from-db-object]]
             [clojure.walk :as walk]
             [ring.util.response :refer [response]]
-            [mochi.helpers :as helpers :refer [now parse-body transform-article-body-to-markdown mapply]])
+            [mochi.helpers :as helpers :refer [now parse-body transform-article-body-to-markdown mapply sort-articles]])
 
   (:import [com.mongodb MongoOptions ServerAddress])
   (:import org.bson.types.ObjectId)
@@ -52,7 +52,11 @@
 (defn find-articles
   "get all articles"
   []
-  (map build-article-to-return (from-db-object (mc/find-maps mongo "articles") true)))
+  (map build-article-to-return 
+       (-> (mc/find-maps mongo "articles")
+           (from-db-object true)
+           sort-articles)))
+
 
 (defn find-articles-html
   "get all articles for html"

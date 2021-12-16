@@ -3,6 +3,7 @@
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.cors :refer [wrap-cors]]
+            [ring.adapter.jetty :refer [run-jetty]]
             [ring.util.response :refer [response]]
             [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
             [clj-http.client :as client]
@@ -28,7 +29,7 @@
   "helper function to get the correct port"
   []
   (-> (or (System/getenv "PORT")
-          "5000")
+          "8080")
       (Integer/parseInt)))
 
 (defn trigger-blog-build
@@ -36,7 +37,9 @@
   [build-pages]
   (if (not= (get build-pages :build-pages) false) (client/post (System/getenv "BUILD_HOOK_URL") {})))
 
-(defn retrieve-article [request]
+(defn retrieve-article
+  "Retrieve a single article"
+  [request]
   (prn (->> (get-in request [:params :article-id])
     (find-document-by-id)))
   (->> (get-in request [:params :article-id])
@@ -69,7 +72,9 @@
 ;; Public Routes
 (defroutes public-routes*
   (GET "/articles/" []
-    (wrap-json-response get-articles-html)))
+    (wrap-json-response get-articles-html))
+  (GET "/articles/:article-id" [article-id]
+    (wrap-json-response retrieve-article)))
 
 (def public-routes
   (-> #'public-routes*))
@@ -105,4 +110,4 @@
         (wrap-cors  :access-control-allow-credentials "true"
             :access-control-allow-origin #".*"
             :access-control-allow-methods [:get :post :delete :patch])
-        (run-server {:port (get-port)}))))
+        (run-jetty {:port (get-port)}))))
