@@ -1,10 +1,14 @@
 # Mochi API
 The API that powers a Mochi blog.
 
+last updated: June 27, 2023
+
 ## Build
 
 To rebuild your executable, just run:
 `clj -M:uberjar`
+
+## Deploy
 
 Then deploy to heroku (or whatever else)
 `git push heroku master`
