@@ -11,5 +11,6 @@ pom.xml.asc
 .hg/
 .env
 .DS_Store
-
+.clj-kondo
+db.transit.json
 notepad
